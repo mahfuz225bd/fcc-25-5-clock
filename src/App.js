@@ -16,53 +16,61 @@ class App extends Component {
   state = initState
 
   incrementBreakValue() {
-    let value = this.state.breakValue
-    if (value < 60) {
-      value++;
+    if (!this.state.isPlaying) {
+      let value = this.state.breakValue
+      if (value < 60) {
+        value++;
 
-      if (this.state.leftTimeFor === "Break") {
-        this.setState({ breakValue: value, leftTimeSec: value * 60 }) // * 60 for converting min to sec
-      } else {
-        this.setState({ breakValue: value })
+        if (this.state.leftTimeFor === "Break") {
+          this.setState({ breakValue: value, leftTimeSec: value * 60 }) // * 60 for converting min to sec
+        } else {
+          this.setState({ breakValue: value })
+        }
       }
     }
   }
 
   decrementBreakValue() {
-    let value = this.state.breakValue
-    if (value > 0) {
-      value--;
+    if (!this.state.isPlaying) {
+      let value = this.state.breakValue
+      if (value > 0) {
+        value--;
 
-      if (this.state.leftTimeFor === "Break") {
-        this.setState({ breakValue: value, leftTimeSec: value * 60 }) // * 60 for converting min to sec
-      } else {
-        this.setState({ breakValue: value })
+        if (this.state.leftTimeFor === "Break") {
+          this.setState({ breakValue: value, leftTimeSec: value * 60 }) // * 60 for converting min to sec
+        } else {
+          this.setState({ breakValue: value })
+        }
       }
     }
   }
 
   incrementSessionValue() {
-    let value = this.state.sessionValue
-    if (value < 60) {
-      value++;
+    if (!this.state.isPlaying) {
+      let value = this.state.sessionValue
+      if (value < 60) {
+        value++;
 
-      if (this.state.leftTimeFor === "Session") {
-        this.setState({ sessionValue: value, leftTimeSec: value * 60 }) // * 60 for converting min to sec
-      } else {
-        this.setState({ sessionValue: value })
+        if (this.state.leftTimeFor === "Session") {
+          this.setState({ sessionValue: value, leftTimeSec: value * 60 }) // * 60 for converting min to sec
+        } else {
+          this.setState({ sessionValue: value })
+        }
       }
     }
   }
 
   decrementSessionValue() {
-    let value = this.state.sessionValue
-    if (value > 0) {
-      value--;
+    if (!this.state.isPlaying) {
+      let value = this.state.sessionValue
+      if (value > 0) {
+        value--;
 
-      if (this.state.leftTimeFor === "Session") {
-        this.setState({ sessionValue: value, leftTimeSec: value * 60 }) // * 60 for converting min to sec
-      } else {
-        this.setState({ sessionValue: value })
+        if (this.state.leftTimeFor === "Session") {
+          this.setState({ sessionValue: value, leftTimeSec: value * 60 }) // * 60 for converting min to sec
+        } else {
+          this.setState({ sessionValue: value })
+        }
       }
     }
   }
@@ -111,6 +119,7 @@ class App extends Component {
   }
 
   componentDidMount() {
+    // alert("This app should be tested!!! not ready to use.")
     this.setLeftTimeForValueToState()
   }
 
