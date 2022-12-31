@@ -5,8 +5,8 @@ import InputSpinner from './components/InputSpinner'
 import DigitalClockDisplay from './components/DigitalClockDisplay'
 
 const initState = {
-  breakValue: 5,
-  sessionValue: 25,
+  breakValue: 1 / 30,
+  sessionValue: 1 / 30,
   leftTimeFor: 'Session',
   leftTimeSec: 0,
   isPlaying: false
@@ -67,7 +67,8 @@ class App extends Component {
     }
   }
 
-  setTimeForToState() {
+  setLeftTimeForValueToState() {
+    // setLeftTimeForValueToState as Second(s)
     const { leftTimeFor, sessionValue, breakValue } = this.state
 
     switch (leftTimeFor) {
@@ -84,19 +85,46 @@ class App extends Component {
     }
   }
 
+  toggleAndSetTimeFor() {
+    const leftTimeFor = this.state.leftTimeFor
+    this.setState({ leftTimeFor: leftTimeFor === 'Session' ? 'Break' : leftTimeFor === 'Break' ? 'Session' : '' })
+  }
+
+  countDown() {
+    return setInterval(() => {
+      const isPlaying = this.state
+      if (isPlaying) {
+        let leftTimeSec = this.state.leftTimeSec
+        if (leftTimeSec === 0) {
+          this.toggleAndSetTimeFor()
+          this.setLeftTimeForValueToState()
+        } else {
+          leftTimeSec--;
+          this.setState({ leftTimeSec })
+        }
+      } else {
+        clearInterval(this)
+      }
+    }, 1000);
+  }
+
   componentDidMount() {
-    this.setTimeForToState()
+    this.setLeftTimeForValueToState()
   }
 
   handleReset() {
     this.setState(initState)
-    setTimeout(() => {
-      this.setTimeForToState()
-    });
+    this.componentDidMount()
+  }
+
+  handlePlay() {
+    this.setState({ isPlaying: true })
+    this.countDown()
   }
 
   render() {
     const { breakValue, sessionValue, leftTimeFor, leftTimeSec, isPlaying } = this.state
+
     return (
       <div className='container'>
         <h1>25 + 5 Clock</h1>
@@ -107,7 +135,7 @@ class App extends Component {
           </div>
           <DigitalClockDisplay label={leftTimeFor} currentTime={leftTimeSec} />
           <div className='action-buttons'>
-            {isPlaying ? <button type='button' title='Pause'>⏸️</button> : <button type='button' title='Play'>▶️</button>}{' '}
+            {isPlaying ? <button type='button' title='Pause'>⏸️</button> : <button type='button' title='Play' onClick={this.handlePlay.bind(this)}>▶️</button>}{' '}
             <button type='button' title='Reset' onClick={this.handleReset.bind(this)}>🔁</button>
           </div>
         </main>
