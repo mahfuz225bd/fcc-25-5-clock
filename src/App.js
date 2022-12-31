@@ -107,10 +107,6 @@ class App extends Component {
           this.toggleAndSetTimeFor()
           this.setLeftTimeForValueToState()
         } else {
-          if (!isPlaying) {
-            clearInterval(this)
-            return
-          }
           leftTimeSec--;
           this.setState({ leftTimeSec })
         }
