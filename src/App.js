@@ -10,7 +10,7 @@ class App extends Component {
     sessionValue: 25,
     leftTimeFor: 'Session',
     leftTime: 0,
-    isPlaying: true
+    isPlaying: false
   }
 
   incrementBreakValue() {
@@ -59,7 +59,7 @@ class App extends Component {
   }
 
   render() {
-    const { breakValue, sessionValue, leftTimeFor, leftTime } = this.state
+    const { breakValue, sessionValue, leftTimeFor, leftTime, isPlaying } = this.state
     return (
       <div className='container'>
         <h1>25 + 5 Clock</h1>
@@ -70,8 +70,8 @@ class App extends Component {
           </div>
           <DigitalClockDisplay label={leftTimeFor} currentTime={leftTime} />
           <div className='action-buttons'>
-            <button type='button'>Play/Pause</button>{' '}
-            <button type='button'>Reset</button>
+            {isPlaying ? <button type='button' title='Pause'>⏸️</button>: <button type='button' title='Play'>▶️</button>}{' '}
+            <button type='button' title='Reset'>🔁</button>
           </div>
         </main>
         <footer>by <a href="http://codepen.io/mahfuz225bd" target="_blank" rel="noreferrer">Muhammad Sultan Al Mahfuz</a>. <a href="https://github.com/mahfuz225bd/fcc-25-5-clock" target="_blank" rel="noreferrer">GitHub Source Code</a>.</footer>
