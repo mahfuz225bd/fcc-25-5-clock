@@ -5,8 +5,8 @@ import InputSpinner from './components/InputSpinner'
 import DigitalClockDisplay from './components/DigitalClockDisplay'
 
 const initState = {
-  breakValue: 1 / 30,
-  sessionValue: 1 / 30,
+  breakValue: 1 / 15,
+  sessionValue: 1 / 15,
   leftTimeFor: 'Session',
   leftTimeSec: 0,
   isPlaying: false
@@ -85,12 +85,12 @@ class App extends Component {
     }
   }
 
-  toggleAndSetTimeFor() {
+  toggleAndSetTimeFor = () => {
     const leftTimeFor = this.state.leftTimeFor
     this.setState({ leftTimeFor: leftTimeFor === 'Session' ? 'Break' : leftTimeFor === 'Break' ? 'Session' : '' })
   }
 
-  countDown() {
+  countDown = () => {
     return setInterval(() => {
       const isPlaying = this.state
       if (isPlaying) {
@@ -99,11 +99,13 @@ class App extends Component {
           this.toggleAndSetTimeFor()
           this.setLeftTimeForValueToState()
         } else {
+          if (!isPlaying) {
+            clearInterval(this)
+            return
+          }
           leftTimeSec--;
           this.setState({ leftTimeSec })
         }
-      } else {
-        clearInterval(this)
       }
     }, 1000);
   }
@@ -122,6 +124,9 @@ class App extends Component {
     this.countDown()
   }
 
+  handlePause() {
+  }
+
   render() {
     const { breakValue, sessionValue, leftTimeFor, leftTimeSec, isPlaying } = this.state
 
@@ -135,7 +140,7 @@ class App extends Component {
           </div>
           <DigitalClockDisplay label={leftTimeFor} currentTime={leftTimeSec} />
           <div className='action-buttons'>
-            {isPlaying ? <button type='button' title='Pause'>⏸️</button> : <button type='button' title='Play' onClick={this.handlePlay.bind(this)}>▶️</button>}{' '}
+            {isPlaying ? <button type='button' title='Pause' onClick={this.handlePause.bind(this)}>⏸️</button> : <button type='button' title='Play' onClick={this.handlePlay.bind(this)}>▶️</button>}{' '}
             <button type='button' title='Reset' onClick={this.handleReset.bind(this)}>🔁</button>
           </div>
         </main>
