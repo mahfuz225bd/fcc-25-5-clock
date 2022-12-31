@@ -74,9 +74,7 @@ class App extends Component {
             <button type='button'>Reset</button>
           </div>
         </main>
-        <footer>
-          Footer Text
-        </footer>
+        <footer>by <a href="http://codepen.io/mahfuz225bd" target="_blank" rel="noreferrer">Muhammad Sultan Al Mahfuz</a>. <a href="https://github.com/mahfuz225bd/fcc-25-5-clock" target="_blank" rel="noreferrer">GitHub Source Code</a>.</footer>
       </div>
     )
   }

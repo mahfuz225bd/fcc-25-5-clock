@@ -15,7 +15,20 @@ h1 {
 }
 
 footer {
-    text-align: center;
+	font-family: Arial, Helvetica, sans-serif;
+	text-align: center;
+	font-size: small;
+	margin-top: 100px;
+}
+
+footer a {
+    color: #000;
+	text-decoration: none;
+	font-weight: 600;
+}
+
+footer a:hover {
+	text-decoration: underline;
 }
 
 @media screen and (max-width: 600px) {
