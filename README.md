@@ -1,6 +1,6 @@
-# Getting Started with Create React App
+# FCC: 25 + 5 Clock App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A 25 + 5 pomodoro clock.
 
 ## Available Scripts
 
