@@ -1,0 +1,25 @@
+.container {}
+
+h1 {
+    text-align: center;
+    font-size: 3em;
+}
+
+.input-times {
+    display: flex;
+    justify-content: space-between;
+}
+
+.action-buttons {
+    text-align: center;
+}
+
+footer {
+    text-align: center;
+}
+
+@media screen and (max-width: 600px) {
+    h1 {
+        font-size: 2.5em;
+    }
+}
