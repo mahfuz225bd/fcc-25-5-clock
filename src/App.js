@@ -5,8 +5,8 @@ import InputSpinner from './components/InputSpinner'
 import DigitalClockDisplay from './components/DigitalClockDisplay'
 
 const initState = {
-  breakValue: 1 / 15,
-  sessionValue: 1 / 15,
+  breakValue: 5,
+  sessionValue: 25,
   leftTimeFor: 'Session',
   leftTimeSec: 0,
   isPlaying: false
@@ -115,7 +115,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-    // alert("This app should be tested!!! not ready to use.")
+    alert("This app should be tested!!! not ready to use.")
     this.setLeftTimeForValueToState()
   }
 
