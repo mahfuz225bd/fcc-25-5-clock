@@ -14,7 +14,7 @@ const DigitalClockDisplay = ({ label, currentTime }) => {
 }
 
 DigitalClockDisplay.propTypes = {
-  currentTime: PropTypes.string.isRequired,
+  currentTime: PropTypes.number.isRequired,
   label: PropTypes.string.isRequired
 }
 

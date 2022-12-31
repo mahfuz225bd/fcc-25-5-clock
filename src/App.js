@@ -18,28 +18,48 @@ class App extends Component {
   incrementBreakValue() {
     let value = this.state.breakValue
     value++;
-    this.setState({ breakValue: value })
+
+    if (this.state.leftTimeFor === "Break") {
+      this.setState({ breakValue: value, leftTimeSec: value * 60 }) // * 60 for converting min to sec
+    } else {
+      this.setState({ breakValue: value })
+    }
   }
 
   decrementBreakValue() {
     let value = this.state.breakValue
     if (value > 0) {
       value--;
-      this.setState({ breakValue: value })
+
+      if (this.state.leftTimeFor === "Break") {
+        this.setState({ breakValue: value, leftTimeSec: value * 60 }) // * 60 for converting min to sec
+      } else {
+        this.setState({ breakValue: value })
+      }
     }
   }
 
   incrementSessionValue() {
     let value = this.state.sessionValue
     value++;
-    this.setState({ sessionValue: value })
+
+    if (this.state.leftTimeFor === "Session") {
+      this.setState({ sessionValue: value, leftTimeSec: value * 60 }) // * 60 for converting min to sec
+    } else {
+      this.setState({ sessionValue: value })
+    }
   }
 
   decrementSessionValue() {
     let value = this.state.sessionValue
     if (value > 0) {
       value--;
-      this.setState({ sessionValue: value })
+
+      if (this.state.leftTimeFor === "Session") {
+        this.setState({ sessionValue: value, leftTimeSec: value * 60 }) // * 60 for converting min to sec
+      } else {
+        this.setState({ sessionValue: value })
+      }
     }
   }
 
