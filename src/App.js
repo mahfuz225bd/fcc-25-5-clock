@@ -4,14 +4,16 @@ import React, { Component } from 'react'
 import InputSpinner from './components/InputSpinner'
 import DigitalClockDisplay from './components/DigitalClockDisplay'
 
+const initState = {
+  breakValue: 5,
+  sessionValue: 25,
+  leftTimeFor: 'Session',
+  leftTime: 0,
+  isPlaying: false
+}
+
 class App extends Component {
-  state = {
-    breakValue: 5,
-    sessionValue: 25,
-    leftTimeFor: 'Session',
-    leftTime: 0,
-    isPlaying: false
-  }
+  state = initState
 
   incrementBreakValue() {
     let value = this.state.breakValue
@@ -41,7 +43,7 @@ class App extends Component {
     }
   }
 
-  componentDidMount() {
+  setTimeForToState() {
     const { leftTimeFor, sessionValue, breakValue } = this.state
 
     switch (leftTimeFor) {
@@ -58,6 +60,17 @@ class App extends Component {
     }
   }
 
+  componentDidMount() {
+    this.setTimeForToState()
+  }
+
+  handleReset() {
+    this.setState(initState)
+    setTimeout(() => {
+      this.setTimeForToState()
+    });
+  }
+
   render() {
     const { breakValue, sessionValue, leftTimeFor, leftTime, isPlaying } = this.state
     return (
@@ -70,8 +83,8 @@ class App extends Component {
           </div>
           <DigitalClockDisplay label={leftTimeFor} currentTime={leftTime} />
           <div className='action-buttons'>
-            {isPlaying ? <button type='button' title='Pause'>⏸️</button>: <button type='button' title='Play'>▶️</button>}{' '}
-            <button type='button' title='Reset'>🔁</button>
+            {isPlaying ? <button type='button' title='Pause'>⏸️</button> : <button type='button' title='Play'>▶️</button>}{' '}
+            <button type='button' title='Reset' onClick={this.handleReset.bind(this)}>🔁</button>
           </div>
         </main>
         <footer>by <a href="http://codepen.io/mahfuz225bd" target="_blank" rel="noreferrer">Muhammad Sultan Al Mahfuz</a>. <a href="https://github.com/mahfuz225bd/fcc-25-5-clock" target="_blank" rel="noreferrer">GitHub Source Code</a>.</footer>
