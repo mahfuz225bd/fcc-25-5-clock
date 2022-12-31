@@ -2,7 +2,7 @@ import './App.css';
 import React, { Component } from 'react'
 
 import InputSpinner from './components/InputSpinner'
-import Display from './components/Display'
+import DigitalClockDisplay from './components/DigitalClockDisplay'
 
 class App extends Component {
   state = {
@@ -42,7 +42,20 @@ class App extends Component {
   }
 
   componentDidMount() {
-    this.setState({ leftTime: this.state.sessionValue })
+    const { leftTimeFor, sessionValue, breakValue } = this.state
+
+    switch (leftTimeFor) {
+      case 'Session':
+        this.setState({ leftTime: sessionValue })
+        break;
+
+      case 'Break':
+        this.setState({ leftTime: breakValue })
+        break;
+      default:
+        console.info('Unable to show timer value for', leftTimeFor);
+        break;
+    }
   }
 
   render() {
@@ -55,7 +68,7 @@ class App extends Component {
             <InputSpinner label='Break Length' value={breakValue} increment={this.incrementBreakValue.bind(this)} decrement={this.decrementBreakValue.bind(this)} />
             <InputSpinner label='Session Length' value={sessionValue} increment={this.incrementSessionValue.bind(this)} decrement={this.decrementSessionValue.bind(this)} />
           </div>
-          <Display />
+          <DigitalClockDisplay label={leftTimeFor} currentTime={leftTime} />
           <div className='action-buttons'>
             <button type='button'>Play/Pause</button>{' '}
             <button type='button'>Reset</button>
