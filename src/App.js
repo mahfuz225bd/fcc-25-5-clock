@@ -27,6 +27,20 @@ class App extends Component {
     }
   }
 
+  incrementSessionValue() {
+    let value = this.state.sessionValue
+    value++;
+    this.setState({ sessionValue: value })
+  }
+
+  decrementSessionValue() {
+    let value = this.state.sessionValue
+    if (value > 0) {
+      value--;
+      this.setState({ sessionValue: value })
+    }
+  }
+
   componentDidMount() {
     this.setState({ leftTime: this.state.sessionValue })
   }
@@ -39,6 +53,7 @@ class App extends Component {
         <main>
           <div className='input-times'>
             <InputSpinner label='Break Length' value={breakValue} increment={this.incrementBreakValue.bind(this)} decrement={this.decrementBreakValue.bind(this)} />
+            <InputSpinner label='Session Length' value={sessionValue} increment={this.incrementSessionValue.bind(this)} decrement={this.decrementSessionValue.bind(this)} />
           </div>
           <Display />
           <div className='action-buttons'>
