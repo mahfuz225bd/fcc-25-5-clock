@@ -8,7 +8,7 @@ const initState = {
   breakValue: 5,
   sessionValue: 25,
   leftTimeFor: 'Session',
-  leftTime: 0,
+  leftTimeSec: 0,
   isPlaying: false
 }
 
@@ -48,11 +48,11 @@ class App extends Component {
 
     switch (leftTimeFor) {
       case 'Session':
-        this.setState({ leftTime: sessionValue })
+        this.setState({ leftTimeSec: sessionValue * 60 })
         break;
 
       case 'Break':
-        this.setState({ leftTime: breakValue })
+        this.setState({ leftTimeSec: breakValue * 60 })
         break;
       default:
         console.info('Unable to show timer value for', leftTimeFor);
@@ -72,7 +72,7 @@ class App extends Component {
   }
 
   render() {
-    const { breakValue, sessionValue, leftTimeFor, leftTime, isPlaying } = this.state
+    const { breakValue, sessionValue, leftTimeFor, leftTimeSec, isPlaying } = this.state
     return (
       <div className='container'>
         <h1>25 + 5 Clock</h1>
@@ -81,7 +81,7 @@ class App extends Component {
             <InputSpinner label='Break Length' value={breakValue} increment={this.incrementBreakValue.bind(this)} decrement={this.decrementBreakValue.bind(this)} />
             <InputSpinner label='Session Length' value={sessionValue} increment={this.incrementSessionValue.bind(this)} decrement={this.decrementSessionValue.bind(this)} />
           </div>
-          <DigitalClockDisplay label={leftTimeFor} currentTime={leftTime} />
+          <DigitalClockDisplay label={leftTimeFor} currentTime={leftTimeSec} />
           <div className='action-buttons'>
             {isPlaying ? <button type='button' title='Pause'>⏸️</button> : <button type='button' title='Play'>▶️</button>}{' '}
             <button type='button' title='Reset' onClick={this.handleReset.bind(this)}>🔁</button>
