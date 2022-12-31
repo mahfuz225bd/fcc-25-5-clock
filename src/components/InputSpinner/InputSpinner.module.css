@@ -1,3 +1,16 @@
 .container {
     text-align: center;
 }
+
+.container a {
+    cursor: pointer;
+}
+
+.value {
+    padding: 5px;
+}
+
+.container a,
+.value {
+    user-select: none;
+}
